@@ -37,6 +37,7 @@ import { Terminal } from 'xterm'
 import TerminalInfoIcon from '../terminal-info'
 import Qm from '../quick-commands/quick-commands-select'
 import BatchInput from './batch-input'
+import { authenticator } from 'otplib'
 
 const { prefix } = window
 const e = prefix('ssh')
@@ -689,6 +690,14 @@ export default class Term extends Component {
       ? typeMap.local
       : type
     const extra = this.props.sessionOptions
+    console.log('1111111', tab.password)
+
+    if (tab.totpSecret) {
+      const totpToken = authenticator.generate(tab.totpSecret)
+      tab.password = tab.password + ' ' + totpToken
+    }
+    console.log('222222', tab.password, tab)
+
     let pid = await fetch.post(url, {
       cols,
       rows,

@@ -329,9 +329,10 @@ export class BookmarkForm extends React.PureComponent {
   passwordRender () {
     const { getFieldDecorator } = this.props.form
     const {
-      password
+      password,
+      totpSecret
     } = this.props.formData
-    return (
+    return [
       <FormItem
         {...formItemLayout}
         label={e('password')}
@@ -348,8 +349,26 @@ export class BookmarkForm extends React.PureComponent {
             placeholder={e('password')}
           />
         )}
+      </FormItem>,
+      <FormItem
+        {...formItemLayout}
+        label={e('totpSecret')}
+        hasFeedback
+      >
+        {getFieldDecorator('totpSecret', {
+          rules: [{
+            min: 16, message: '16 chars min'
+          }, {
+            max: 16, message: '16 chars max'
+          }],
+          initialValue: totpSecret
+        })(
+          <Input
+            placeholder={e('totpSecret')}
+          />
+        )}
       </FormItem>
-    )
+    ]
   }
 
   privateKeyRender () {
