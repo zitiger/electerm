@@ -690,13 +690,11 @@ export default class Term extends Component {
       ? typeMap.local
       : type
     const extra = this.props.sessionOptions
-    console.log('1111111', tab.password)
 
     if (tab.totpSecret) {
       const totpToken = authenticator.generate(tab.totpSecret)
       tab.password = tab.password + ' ' + totpToken
     }
-    console.log('222222', tab.password, tab)
 
     let pid = await fetch.post(url, {
       cols,
