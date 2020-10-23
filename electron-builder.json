@@ -6,7 +6,7 @@
   },
   "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
   "win": {
-    "target": ["portable"],
+    "target": ["zip"],
     "icon": "node_modules/@electerm/electerm-resource/build/icons.ico"
   },
   "mac": {
